@@ -11,8 +11,7 @@ const write = (p, s) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs
 const manifestPath = `${MAIN}/AndroidManifest.xml`;
 need(manifestPath);
 let m = fs.readFileSync(manifestPath, 'utf8');
-if (!m.includes('android.permission.INTERNET')) m = m.replace('</manifest>', '    <uses-permission android:name="android.permission.INTERNET" />
-</manifest>');
+if (!m.includes('android.permission.INTERNET')) m = m.replace('</manifest>', `    <uses-permission android:name="android.permission.INTERNET" />\n</manifest>`);
 if (!m.includes('android:screenOrientation')) m = m.replace('<activity', '<activity android:screenOrientation="portrait"');
 write(manifestPath, m);
 
